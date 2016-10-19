@@ -1,6 +1,6 @@
 package Connecteur;
 
-import Role.Role;
+import Interface.Role;
 
 import java.util.LinkedList;
 
@@ -8,12 +8,8 @@ import java.util.LinkedList;
  * Created by Abdeldjallil on 17/10/2016.
  */
 
-public class ConnecteurConcret implements ConnecteurExplicite {
+public abstract class ConnecteurConcret implements ConnecteurExplicite {
 
-    LinkedList<Role> ListeRoles;
+    LinkedList<Glue> glues;
 
-    @Override
-    public void Glue(LinkedList<Role> ListePar) {
-
-    }
 }

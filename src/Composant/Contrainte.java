@@ -3,6 +3,7 @@ package Composant;
 /**
  * Created by Abdeldjallil on 17/10/2016.
  */
-public class Contrainte {
+public abstract class Contrainte {
 
+    ComposantConcret composantConcret;
 }

@@ -1,17 +1,13 @@
 package Connecteur;
 
-import Port.*;
+import Interface.*;
 
 /**
  * Created by Abdeldjallil on 17/10/2016.
  */
-public class LienBinding extends ConnecteurAbstrait {
+public abstract class LienBinding implements ConnecteurAbstrait {
 
-    public void relierRequis(PortConfigurationRequis PConfR, PortComposantRequis PCompR){
+    public abstract void relierRequis(PortConfigurationRequis PConfR, PortComposantRequis PCompR);
 
-    }
-
-    public void relierFourni(PortConfigurationFourni PConfF, PortComposantFourni PCompF){
-
-    }
+    public abstract void relierFourni(PortConfigurationFourni PConfF, PortComposantFourni PCompF);
 }
