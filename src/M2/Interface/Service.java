@@ -7,6 +7,7 @@ import M2.ObjectArchi.ObjetArchitectural;
  */
 public abstract class Service extends Interface {
     public Service(ObjetArchitectural objetArchi, String name) {
+
         super(objetArchi, name);
     }
 }

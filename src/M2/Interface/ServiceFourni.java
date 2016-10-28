@@ -8,6 +8,7 @@ import M2.ObjectArchi.ObjetArchitectural;
 public abstract class ServiceFourni extends Service {
 
     public ServiceFourni(ObjetArchitectural objetArchi, String name) {
+
         super(objetArchi, name);
     }
 }

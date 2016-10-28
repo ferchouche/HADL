@@ -7,6 +7,7 @@ import M2.ObjectArchi.ObjetArchitectural;
  */
 public abstract class PortConfiguration extends Port {
     public PortConfiguration(ObjetArchitectural objetArchi, String name) {
+
         super(objetArchi, name);
     }
 }

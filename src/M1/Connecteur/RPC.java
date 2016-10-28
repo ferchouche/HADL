@@ -1,5 +1,7 @@
 package M1.Connecteur;
 
+import M1.Interface.Colled;
+import M1.Interface.Coller;
 import M2.Connecteur.ConnecteurConcret;
 import M2.Connecteur.ConnecteurExplicite;
 
@@ -8,7 +10,9 @@ import M2.Connecteur.ConnecteurExplicite;
  */
 public class RPC extends ConnecteurConcret {
 
-    public RPC(String name) {
-        super(name);
+    public RPC() {
+        super("RPC");
+        this.roles.add(new Coller(this));
+        this.roles.add(new Colled(this));
     }
 }
