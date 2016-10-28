@@ -12,14 +12,14 @@ public abstract class ComposantConcret implements ComposantAbstrait {
 
     protected LinkedList<Contrainte> listeContraintes;
     protected LinkedList<Propriete> listeProprietes;
-    protected LinkedList<PortComposantFourni> portsfourni;
-    protected LinkedList<PortComposantRequis> portsrequis;
+    protected LinkedList<PortComposantFourni> portsFournis;
+    protected LinkedList<PortComposantRequis> portsRequis;
     protected String name;
 
     public ComposantConcret(String name){
         this.name = name;
-        this.portsrequis = new LinkedList<PortComposantRequis>();
-        this.portsfourni = new LinkedList<PortComposantFourni>();
+        this.portsRequis = new LinkedList<PortComposantRequis>();
+        this.portsFournis = new LinkedList<PortComposantFourni>();
         this.listeContraintes = new LinkedList<Contrainte>();
         this.listeProprietes = new LinkedList<Propriete>();
     }

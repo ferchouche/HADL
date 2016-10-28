@@ -7,6 +7,6 @@ import M2.Interface.Interface;
  */
 public interface ObjetArchitectural {
 
-    Interface inrerfacerequise = null;
-    Interface interfacefournie = null;
+    Interface inrerfaceRequise = null;
+    Interface interfaceFournie = null;
 }

@@ -10,13 +10,11 @@ import M2.Interface.PortConfigurationRequis;
  */
 public class LienBinding extends M2.Connecteur.LienBinding{
 
-    @Override
-    public void relierRequis(PortConfigurationRequis PConfR, PortComposantRequis PCompR) {
-
+    public LienBinding(PortComposantFourni portComposantFourni, PortConfigurationFourni portConfigurationFourni) {
+        super(portComposantFourni, portConfigurationFourni);
     }
 
-    @Override
-    public void relierFourni(PortConfigurationFourni PConfF, PortComposantFourni PCompF) {
-
+    public LienBinding(PortComposantRequis portComposantRequis, PortConfigurationRequis portConfigurationRequis){
+        super(portComposantRequis, portConfigurationRequis);
     }
 }

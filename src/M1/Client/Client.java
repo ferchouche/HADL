@@ -15,7 +15,7 @@ public class Client extends ComposantConcret {
 
     public Client() {
         super("Client");
-        this.portsrequis.add(new PortComposantRequis("ReceiveResponse"));
-        this.portsfourni.add(new PortComposantFourni("SendRequest"));
+        this.portsRequis.add(new PortComposantRequis(this, "ReceiveResponse"));
+        this.portsFournis.add(new PortComposantFourni(this, "SendRequest"));
     }
 }

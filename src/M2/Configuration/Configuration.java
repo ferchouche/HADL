@@ -5,20 +5,17 @@ import M2.Connecteur.ConnecteurAbstrait;
 import M2.Connecteur.ConnecteurExplicite;
 
 import java.util.LinkedList;
-import java.util.stream.Stream;
 
 /**
  * Created by Abdeldjallil on 17/10/2016.
  */
-public abstract class Configuration implements ComposantAbstrait, ConnecteurExplicite {
-    String name;
-    LinkedList<ComposantAbstrait> Composants;
-    LinkedList<ConnecteurAbstrait> Connecteurs;
+public abstract class Configuration extends ConnecteurExplicite implements ComposantAbstrait  {
+    LinkedList<ComposantAbstrait> composants;
+    LinkedList<ConnecteurAbstrait> connecteurs;
 
     public Configuration(String name) {
-        this.name = name;
-        this.Composants = new LinkedList<ComposantAbstrait>();
-        this.Connecteurs = new LinkedList<ConnecteurAbstrait>();
+        this.composants = new LinkedList<ComposantAbstrait>();
+        this.connecteurs = new LinkedList<ConnecteurAbstrait>();
 
     }
 }
