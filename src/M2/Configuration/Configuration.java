@@ -11,11 +11,11 @@ import java.util.LinkedList;
  * Created by Abdeldjallil on 17/10/2016.
  */
 public abstract class Configuration extends ConnecteurExplicite implements ComposantAbstrait  {
-    protected LinkedList<ComposantAbstrait> composants;
-    protected LinkedList<ConnecteurAbstrait> connecteurs;
-    protected LinkedList<PortConfigurationFourni> portsFournis;
-    protected LinkedList<PortConfigurationRequis> portsRequis;
-    protected String name;
+    public LinkedList<ComposantAbstrait> composants;
+    public LinkedList<ConnecteurAbstrait> connecteurs;
+    public LinkedList<PortConfigurationFourni> portsFournis;
+    public LinkedList<PortConfigurationRequis> portsRequis;
+    public String name;
 
     public Configuration(String name) {
         this.name = name;
