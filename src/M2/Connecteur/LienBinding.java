@@ -6,8 +6,8 @@ import M2.Interface.*;
  * Created by Abdeldjallil on 17/10/2016.
  */
 public abstract class LienBinding implements ConnecteurAbstrait {
-    private PortComposant portComposant;
-    private PortConfiguration portConfiguration;
+    public PortComposant portComposant;
+    public PortConfiguration portConfiguration;
 
     public LienBinding(PortComposantFourni portComposantFourni, PortConfigurationFourni portConfigurationFourni){
         portComposant = portComposantFourni;

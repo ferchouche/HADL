@@ -24,11 +24,11 @@ public class SystemeCS extends Configuration{
 
     public void notification(ObjetArchitectural objArchi, String info) {
         if (objArchi instanceof Client)
-            System.out.printf("Client "+ info);
+            System.out.printf("La demande à était envoyer par le client :"+ info);
         else
         if (objArchi instanceof Serveur)
-            System.out.printf("Server "+ info);
+            System.out.printf("La demande à était envoyer par le Serveur :"+ info);
         else
-            System.out.printf("RPC "+ info);
+            System.out.printf("La demande à était envoyer par le RPC : "+ info);
     }
 }

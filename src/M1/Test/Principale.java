@@ -12,16 +12,9 @@ import M2.Composant.ComposantAbstrait;
 public class Principale {
     public static void main(String[] args) {
         SystemeCS monS = new SystemeCS();
-            ComposantAbstrait c =  monS.composants.get(1);
-        if (c instanceof Client) {
-            Client cl = (Client) c;
-            ((Client) c).EnvoyerRequete();
-        }
-        else {
-            Serveur c2 = (Serveur) c;
-            ((Serveur) c).recever();
-        }
-
+        ComposantAbstrait c =  monS.composants.get(0);
+        Client cl = (Client) c;
+        ((Client) c).EnvoyerRequete();
 
     }
 

@@ -8,9 +8,9 @@ import java.util.LinkedList;
  * Created by erhode on 10/28/16.
  */
 public abstract class ConnecteurConcret extends ConnecteurExplicite {
-    protected LinkedList<Glue> glues;
-    protected LinkedList<Role> roles;
-    protected String name;
+    public LinkedList<Glue> glues;
+    public LinkedList<Role> roles;
+    public String name;
 
     public ConnecteurConcret(String name) {
         this.name = name;
