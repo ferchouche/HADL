@@ -10,9 +10,9 @@ import M2.Configuration.Configuration;
 /**
  * Created by Abdeldjallil on 23/10/2016.
  */
-public class Systeme extends Configuration{
+public class SystemeCS extends Configuration{
 
-    public Systeme() {
+    public SystemeCS() {
         super("System C/S");
         this.portsFournis.add(new SendInformation(this));
         this.portsRequis.add(new ReceiveInformation(this));
