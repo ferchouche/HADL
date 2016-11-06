@@ -17,4 +17,20 @@ public abstract class ConnecteurConcret extends ConnecteurExplicite {
         this.glues = new LinkedList<Glue>();
         this.roles = new LinkedList<Role>();
     }
+
+    public LinkedList<Glue> getGlues() {
+        return glues;
+    }
+
+    public void setGlues(LinkedList<Glue> glues) {
+        this.glues = glues;
+    }
+
+    public LinkedList<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(LinkedList<Role> roles) {
+        this.roles = roles;
+    }
 }

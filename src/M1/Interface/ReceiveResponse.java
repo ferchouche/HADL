@@ -8,7 +8,6 @@ import M2.ObjectArchi.ObjetArchitectural;
  */
 public class ReceiveResponse extends PortComposantRequis{
     public ReceiveResponse(ObjetArchitectural objetArchi) {
-
         super(objetArchi, "Receive Response");
     }
 }

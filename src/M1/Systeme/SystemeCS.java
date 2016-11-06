@@ -1,34 +1,50 @@
 package M1.Systeme;
 
-import M1.Client.Client;
-import M1.Connecteur.RPC;
-import M1.Interface.ReceiveInformation;
-import M1.Interface.SendInformation;
-import M1.Serveur.Serveur;
+
+import M2.Composant.ComposantAbstrait;
+import M2.Composant.ComposantConcret;
 import M2.Configuration.Configuration;
+import M2.Connecteur.ConnecteurAbstrait;
+import M2.Connecteur.ConnecteurConcret;
+import M2.Connecteur.LienAttachement;
+import M2.Interface.Interface;
 import M2.ObjectArchi.ObjetArchitectural;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 /**
  * Created by Abdeldjallil on 23/10/2016.
  */
 public class SystemeCS extends Configuration{
-
+    private Map<Interface, LienAttachement> attachementMap;
     public SystemeCS() {
         super("System C/S");
-        this.portsFournis.add(new SendInformation(this));
-        this.portsRequis.add(new ReceiveInformation(this));
-        this.composants.add(new Client(this));
-        this.composants.add(new Serveur(this));
-        this.connecteurs.add(new RPC(this));
+        attachementMap = new HashMap<Interface, LienAttachement>();
     }
 
-    public void notification(ObjetArchitectural objArchi, String info) {
-        if (objArchi instanceof Client)
-            System.out.printf("La demande à était envoyer par le client :"+ info);
-        else
-        if (objArchi instanceof Serveur)
-            System.out.printf("La demande à était envoyer par le Serveur :"+ info);
-        else
-            System.out.printf("La demande à était envoyer par le RPC : "+ info);
+    public void notification(Interface interfaceCalling, ObjetArchitectural emetteur){
+        System.out.println("System notifier par composant");
+        attachementMap.get(interfaceCalling).transmettre(emetteur);
     }
+
+    public void notification(Interface interfaceCalling){
+        System.out.println("System notifier par connecteur");
+        attachementMap.get(interfaceCalling).transmettre();
+    }
+
+    public void Lier(ComposantAbstrait composantAbstrait, ConnecteurAbstrait connecteurAbstrait){
+        if(composants.contains(composantAbstrait) && connecteurs.contains(connecteurAbstrait)){
+            Integer i = 1;
+            attachementMap.put(((ComposantConcret)composantAbstrait).getPortsFournis().getFirst(),
+                    new LienAttachement(((ComposantConcret)composantAbstrait).getPortsFournis().getFirst(),
+                            ((ConnecteurConcret)connecteurAbstrait).getRoles().getFirst()));
+            while(attachementMap.containsKey(((ConnecteurConcret)connecteurAbstrait).getRoles().get(i))){++i;}
+            attachementMap.put(((ConnecteurConcret)connecteurAbstrait).getRoles().get(i),
+                    new LienAttachement(((ComposantConcret)composantAbstrait).getPortsRequis().getFirst(),
+                            ((ConnecteurConcret)connecteurAbstrait).getRoles().get(i)));
+        }
+    }
+
 }

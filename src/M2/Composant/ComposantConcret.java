@@ -24,4 +24,29 @@ public abstract class ComposantConcret implements ComposantAbstrait {
         this.listeProprietes = new LinkedList<Propriete>();
     }
 
+    public void notifierSystem(){};
+
+    public LinkedList<PortComposantFourni> getPortsFournis() {
+        return portsFournis;
+    }
+
+    public void setPortsFournis(LinkedList<PortComposantFourni> portsFournis) {
+        this.portsFournis = portsFournis;
+    }
+
+    public LinkedList<PortComposantRequis> getPortsRequis() {
+        return portsRequis;
+    }
+
+    public void setPortsRequis(LinkedList<PortComposantRequis> portsRequis) {
+        this.portsRequis = portsRequis;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

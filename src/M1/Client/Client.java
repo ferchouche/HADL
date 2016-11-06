@@ -20,10 +20,11 @@ public class Client extends ComposantConcret {
     }
 
     public void EnvoyerRequete() {
-        String marequte = "Est-ce que j'existe";
+        ((SendRequest)portsFournis.getFirst()).setMessage("Envoie Requete");
+    }
 
-        SendRequest monportfourni = (SendRequest)this.portsFournis.getFirst();
-        System.out.printf("J'ai envoyer ma requete à mon port send request\n");
-        monportfourni.Transfer(marequte, cs.portsFournis.getFirst(), this);
+    @Override public void notifierSystem(){
+        System.out.println("Notification du system par le client");
+        cs.notification(portsFournis.getFirst(), this);
     }
 }

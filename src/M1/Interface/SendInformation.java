@@ -12,9 +12,4 @@ public class SendInformation extends PortConfigurationFourni{
 
         super(objetArchi, "Send Information");
     }
-
-    public void Transfer (String message, ObjetArchitectural objArchi) {
-        System.out.printf("J'ai réçu la demande et je le fait transmettre à la configuration\n");
-        ((SystemeCS)this.objetArchi).notification(objArchi, message);
-    }
 }
