@@ -12,15 +12,7 @@ import M1.Systeme.SystemeCS;
 public class Principale {
     public static void main(String[] args) {
         SystemeCS monS = new SystemeCS();
-        Client client = new Client(monS);
-        Serveur serveur = new Serveur(monS);
-        RPC rpc = new RPC(monS);
-        monS.ajouterComposant(client);
-        monS.ajouterComposant(serveur);
-        monS.ajouterConnecteur(rpc);
-        monS.Lier(client,rpc); //lier le client en premier obligatoire
-        monS.Lier(serveur,rpc);
-        client.EnvoyerRequete();
+        monS.test();
     }
 
 }

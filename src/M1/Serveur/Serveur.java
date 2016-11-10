@@ -1,12 +1,10 @@
 package M1.Serveur;
 
-import M1.Interface.ReceiveRequest;
-import M1.Interface.ReceiveResponse;
-import M1.Interface.SendRequest;
-import M1.Interface.SendResponse;
+import M1.Interface.PortComposantFourni;
+import M1.Interface.PortComposantRequis;
 import M1.Systeme.SystemeCS;
 import M2.Composant.ComposantConcret;
-import com.sun.org.apache.xpath.internal.operations.Bool;
+import M2.Interface.Interface;
 
 /**
  * Created by Abdeldjallil on 23/10/2016.
@@ -15,35 +13,24 @@ public class Serveur extends ComposantConcret{
     SystemeCS cs;
     public Serveur(SystemeCS cs) {
         super("Server");
-        this.portsRequis.add(new ReceiveRequest(this));
-        this.portsFournis.add(new SendResponse(this));
+        this.portsRequis.add(new PortComposantRequis(this, "PortServeurRequis"));
+        this.portsFournis.add(new PortComposantFourni(this, "PortServeurFourni"));
         this.cs = cs;
     }
 
-    @Override public void notifierSystem(){
-        System.out.println("Notification du system par le serveur");
-        cs.notification(portsFournis.getFirst(), this);
+    public PortComposantFourni getPremierFourni(){
+        return (PortComposantFourni)portsFournis.getFirst(); // without cast, function returning M2 PortComposantFourni
+    }
+
+    public PortComposantRequis getPremierRequis(){
+        return (PortComposantRequis)portsRequis.getFirst(); // without cast, function returning M2 PortComposantRequis
+    }
+
+    public void notifierSystem(Interface notifieur){
+        cs.notification(notifieur);
     }
 
     public void traiterInformation(Object information){
-        try{
-            System.out.println("le message est un entier : " + Integer.toString((Integer)information));
-        }catch(Exception eInt){
-            try{
-                if((Boolean)information){
-                    System.out.println("le message est un boolean true");
-                }else{
-                    System.out.println("le message est un boolean false");
-                }
-            }catch(Exception eBool){
-                try{
-                    System.out.println("le message est une String : " + information);
-                }catch (Exception eString){
-                    System.out.println("Le message n'est pas d'un type générique");
-                }
-            }
-        }
 
-        ((SendResponse)portsFournis.getFirst()).setMessage("reponse");
     }
 }

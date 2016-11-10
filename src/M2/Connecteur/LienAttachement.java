@@ -20,13 +20,10 @@ public class LienAttachement implements ConnecteurAbstrait {
     }
 
     public void transmettre(){
-        System.out.println("transmission du message vers port composant");
         portComposant.setInformation(roleConnecteur.getInformation());
     }
 
     public void transmettre(ObjetArchitectural emetteur){
-        System.out.println("transmission du message vers role connecteur");
-        System.out.println(roleConnecteur.getClass().getName());
         roleConnecteur.setInformation(emetteur, portComposant.getInformation());
     }
 }

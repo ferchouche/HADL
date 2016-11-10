@@ -8,7 +8,6 @@ import M2.ObjectArchi.ObjetArchitectural;
 public class PortConfigurationFourni extends PortConfiguration {
 
     public PortConfigurationFourni(ObjetArchitectural objetArchi, String name) {
-
         super(objetArchi, name);
     }
 }

@@ -18,9 +18,7 @@ public class Glue {
         this.roles = new LinkedList<>();
     }
 
-    public void coller(Role role, ObjetArchitectural emetteur){
-        roles.get(1).setInformation(roles.getFirst().getInformation());
-    }
+    public void coller(){}
 
     public void ajouterRole(Role role){
         roles.add(role);

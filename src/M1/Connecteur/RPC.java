@@ -1,7 +1,9 @@
 package M1.Connecteur;
 
-import M1.Interface.Called;
-import M1.Interface.Caller;
+import M1.Interface.PortComposantFourni;
+import M1.Interface.PortComposantRequis;
+import M1.Interface.RoleFourni;
+import M1.Interface.RoleRequis;
 import M1.Systeme.SystemeCS;
 import M2.Connecteur.ConnecteurConcret;
 import M2.Connecteur.Glue;
@@ -18,21 +20,35 @@ public class RPC extends ConnecteurConcret {
     SystemeCS cs;
     public RPC(SystemeCS cs) {
         super("RPC");
-        this.roles.add(new Caller(this));
-        this.roles.add(new Called(this)); // role du client si linké en premier
-        this.roles.add(new Called(this)); // role du serveur si linké en second
+        this.roles.add(new RoleRequis(this, "Caller"));
+        this.roles.add(new RoleFourni(this, "CalledClient"));
+        this.roles.add(new RoleFourni(this, "CalledServeur"));
         this.cs = cs;
 
-        glues.add(new Glue("versCalledClient", this));
+        glues.add(new Glue("versCalledClient", this){
+            @Override public void coller(){
+                roles.get(1).setInformation(roles.getFirst().getInformation());
+                ((RPC)connecteurConcret).notifierSystem(roles.get(0));
+            }
+        });
         glues.getFirst().ajouterRole(roles.getFirst());
         glues.getFirst().ajouterRole(roles.get(1));
-        glues.add(new Glue("versCalledServeur", this));
+
+        glues.add(new Glue("versCalledServeur", this){
+            @Override public void coller(){
+                roles.get(1).setInformation(roles.getFirst().getInformation());
+                ((RPC)connecteurConcret).notifierSystem(roles.get(1));
+            }
+        });
         glues.get(1).ajouterRole(roles.getFirst());
         glues.get(1).ajouterRole(roles.get(2));
     }
 
-    public void notifierSystem(Interface notifier){
-        System.out.println("notif du system par le RPC");
-        cs.notification(notifier);
+    public void notifierSystem(Interface notifieur){
+        cs.notification(notifieur);
+    }
+
+    public Role getRole(Integer index){
+        return roles.get(index);
     }
 }

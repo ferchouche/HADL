@@ -14,14 +14,14 @@ import java.util.LinkedList;
  * Created by Abdeldjallil on 17/10/2016.
  */
 public abstract class Configuration extends ConnecteurExplicite implements ComposantAbstrait  {
-    public LinkedList<ComposantAbstrait> composants;
-    public LinkedList<ConnecteurAbstrait> connecteurs;
-    public String name;
+    protected LinkedList<ComposantAbstrait> composants;
+    protected LinkedList<ConnecteurAbstrait> connecteurs;
+    protected String name;
 
     public Configuration(String name) {
         this.name = name;
-        this.composants = new LinkedList<ComposantAbstrait>();
-        this.connecteurs = new LinkedList<ConnecteurAbstrait>();
+        this.composants = new LinkedList<>();
+        this.connecteurs = new LinkedList<>();
     }
 
     public void ajouterComposant(ComposantConcret composantConcret){
