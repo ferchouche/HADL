@@ -14,4 +14,6 @@ public class Role extends Interface {
     }
 
     public void setInformation(ObjetArchitectural emetteur, Object information){}
+
+
 }

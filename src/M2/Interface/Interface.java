@@ -22,4 +22,8 @@ public abstract class Interface {
     public void setInformation(Object information) {
         this.information = information;
     }
+
+    public String getName() {
+        return name;
+    }
 }

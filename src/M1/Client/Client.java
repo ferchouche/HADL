@@ -25,6 +25,8 @@ public class Client extends ComposantConcret {
         System.out.printf("Le client envoie une requete\n");
         (portsFournis.getFirst()).setInformation("la Requete du Client");
         cs.notification(portsFournis.getFirst(), this);
+        System.out.printf("\n\n\n"+this.portsFournis.getFirst().getInformation().toString()+"\n");
+        System.out.printf(this.portsRequis.getFirst().getInformation().toString()+"\n");
     }
 
     public void notifierSystem(Interface notifieur){

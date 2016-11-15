@@ -1,35 +1,29 @@
 package M1.Connecteur;
 
-import M1.Interface.PortComposantFourni;
-import M1.Interface.PortComposantRequis;
 import M1.Interface.RoleFourni;
 import M1.Interface.RoleRequis;
-import M1.Systeme.SystemeCS;
+import M1.Serveur.ServeurDetail;
 import M2.Connecteur.ConnecteurConcret;
 import M2.Connecteur.Glue;
 import M2.Interface.Interface;
-import M2.Interface.Role;
-import M2.ObjectArchi.ObjetArchitectural;
-
 
 /**
- * Created by Abdeldjallil on 23/10/2016.
+ * Created by Abdeldjallil on 14/11/2016.
  */
-public class RPC extends ConnecteurConcret {
+public class SecurityQuery extends ConnecteurConcret{
 
-    SystemeCS cs;
-    public RPC(SystemeCS cs) {
-        super("RPC");
+    ServeurDetail sd;
+    public SecurityQuery(ServeurDetail sd) {
+        super("Security Query");
         this.roles.add(new RoleRequis(this, "Caller"));
-        this.roles.add(new RoleFourni(this, "CalledClient"));
-        this.roles.add(new RoleFourni(this, "CalledServeur"));
-        this.cs = cs;
+        this.roles.add(new RoleFourni(this, "CalledSecurityManager"));
+        this.roles.add(new RoleFourni(this, "CalledDatabase"));
+        this.sd = sd;
 
-
-        glues.add(new Glue("versCalledClient", this){
+        glues.add(new Glue("versCalledSecurityManager", this){
             @Override public void coller(){
                 roles.get(1).setInformation(roles.getFirst().getInformation());
-                ((RPC)connecteurConcret).notifierSystem(roles.get(1));// c'est 1 et non pas 0
+                ((SecurityQuery)connecteurConcret).notifierSystem(roles.get(1));// c'est 1 et non pas 0
 
             }
         });
@@ -39,10 +33,10 @@ public class RPC extends ConnecteurConcret {
         //je pense qu'on doit instancier objet glue puis ajouter les roles pour appeler la méthode coller
 
 
-        glues.add(new Glue("versCalledServeur", this){
+        glues.add(new Glue("versCalledDatabase", this){
             @Override public void coller(){
                 roles.get(1).setInformation(roles.getFirst().getInformation());
-                ((RPC)connecteurConcret).notifierSystem(roles.get(1));
+                ((SecurityQuery)connecteurConcret).notifierSystem(roles.get(1));
 
             }
         });
@@ -51,8 +45,7 @@ public class RPC extends ConnecteurConcret {
     }
 
     public void notifierSystem(Interface notifieur){
-        cs.notification(notifieur);
+        sd.notification(notifieur);
     }
-
 
 }

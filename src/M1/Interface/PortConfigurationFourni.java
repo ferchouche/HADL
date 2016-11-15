@@ -15,7 +15,7 @@ public class PortConfigurationFourni extends M2.Interface.PortConfigurationFourn
     public void setInformation(Object information) {
         this.information = information.toString();
         if (parent instanceof ServeurDetail) {
-            System.out.printf("Le message de retour et sur le port du serveur Detail\n");
+            System.out.printf("Le message est sur le port "+ this.getName() + "  du serveur Detail\n");
             ((ServeurDetail) parent).Notification();
         }
     }

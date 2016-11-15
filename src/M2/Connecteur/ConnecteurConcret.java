@@ -33,4 +33,7 @@ public abstract class ConnecteurConcret extends ConnecteurExplicite {
     public void setRoles(LinkedList<Role> roles) {
         this.roles = roles;
     }
+    public Role getRole(Integer index){
+        return roles.get(index);
+    }
 }

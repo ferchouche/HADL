@@ -16,7 +16,7 @@ public class PortConfigurationRequis extends M2.Interface.PortConfigurationRequi
     @Override public void setInformation(Object information) {
         this.information = information.toString();
         if (parent instanceof ServeurDetail) {
-            System.out.printf("Le message et sur le port du serveur Detail\n");
+            System.out.printf("Le message est sur le port " + this.getName() + "  du serveur Detail\n");
             ((ServeurDetail)parent).notifierBinding(this);
         }
         //else la deuxieme config systeme cs

@@ -35,6 +35,7 @@ public class LienBinding implements ConnecteurAbstrait {
 
     public void TransmetterVersComposant() {
         this.portComposant.setInformation(portConfiguration.getInformation());
+        //System.out.printf("La\n");
     }
 
 

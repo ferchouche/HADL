@@ -5,6 +5,7 @@ import M1.Interface.PortComposantRequis;
 import M1.Serveur.ServeurDetail;
 import M2.Composant.ComposantConcret;
 import M2.Interface.Interface;
+import M2.Interface.PortComposant;
 
 import java.time.Clock;
 
@@ -37,13 +38,39 @@ public class ConnectionManager extends ComposantConcret{
     }
 
     public void notifierSystem(Interface notifieur){
-
-        testretour();
+        if (notifieur.getName() == "external_socket_Fourni")
+            //System.out.printf("C'est bon\n");
+           sd.notifierBinding(notifieur);
+        else
+            sd.notification(notifieur, this);
     }
 
     public void testretour() {
-        System.out.printf("Le connection manager envoie la reponse au client\n");
-        this.portsFournis.getFirst().setInformation("La reponse du Connection manager");
-        sd.notifierBinding(this.portsFournis.getFirst());
+      //  System.out.printf("Le connection manager envoie la reponse au client\n");
+        //this.portsFournis.getFirst().setInformation("La reponse du Connection manager");
+        //sd.notifierBinding(this.portsFournis.getFirst());
+       // this.portsRequis.getFirst().setInformation("cc");
+        this.copierMessageEntrePort(this.portsRequis.getFirst());
+       // System.out.printf( this.portsFournis.get(1).getInformation().toString());
+
+    }
+
+    public void copierMessageEntrePort(PortComposant pc) {
+        if (pc.getName() == "external_socket_Requis")
+            /*dés que un message arrive de la part du serveur detil il sera copier sur le port security_check_Fourni
+            du compsant connection manager
+            */
+            this.portsFournis.get(1).setInformation(pc.getInformation());
+        else
+            if (pc.getName() == "security_check_Requis")
+            /*
+            si le security manager il donne l'acce on copie le message vers dbQuery_Founi
+            sinon on copie le message vers external_socket_Fourni pour sortir, (dans ce cas je traite le cas ideal)
+             */
+            this.portsFournis.get(2).setInformation(pc.getInformation());
+        else//external_socket_Fourni
+            this.portsFournis.get(0).setInformation(pc.getInformation());
+
+
     }
 }
