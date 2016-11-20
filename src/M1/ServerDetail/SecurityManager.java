@@ -6,6 +6,9 @@ import M1.Serveur.ServeurDetail;
 import M2.Composant.ComposantConcret;
 import M2.Interface.Interface;
 import M2.Interface.PortComposant;
+import M2.ObjectArchi.ObjetArchitectural;
+
+import java.util.HashMap;
 
 /**
  * Created by Abdeldjallil on 11/11/2016.
@@ -13,6 +16,9 @@ import M2.Interface.PortComposant;
 public class SecurityManager extends ComposantConcret{
 
     ServeurDetail sd;
+    HashMap<Integer, Integer> permissions;
+    private String tempRequete;
+
     public SecurityManager(ServeurDetail sd) {
         super("Security Manager");
 
@@ -21,8 +27,16 @@ public class SecurityManager extends ComposantConcret{
 
         this.portsFournis.add(new PortComposantFourni(this, "security_auth_Fourni"));
         this.portsFournis.add(new PortComposantFourni(this, "check_query_Fourni"));
-
+        this.permissions = new HashMap<>();
         this.sd = sd;
+
+        initPermission();
+    }
+
+    private void initPermission() {
+        permissions.put(1967, 1);
+        permissions.put(987, 0);
+        permissions.put(3987, 2);
     }
 
     public PortComposantFourni getFourni(int i) {
@@ -48,5 +62,36 @@ public class SecurityManager extends ComposantConcret{
     public void notifierSystem(Interface notifieur){
         sd.notification(notifieur, this);
        // System.out.printf(notifieur.getName().toString());
+    }
+
+    public void traiter(ObjetArchitectural emetteur, String requete){
+        String[] parsed = requete.split("|");
+        if (parsed.length == 3 || parsed.length == 4) {
+            if (emetteur.getClass().equals(ConnectionManager.class)) {
+                // port de la DataBase
+                try{
+                    if(permissions.get(Integer.parseInt(parsed[0])) != null){
+                        StringBuilder requeteOnly = new StringBuilder();
+                        for (Integer i = 1; i < parsed.length; i++){
+                            requeteOnly.append(parsed[i]);
+                            if (i < parsed.length + 1)
+                                requeteOnly.append("|");
+                        }
+                        this.tempRequete = requeteOnly.toString();
+                        portsFournis.get(0).setInformation(tempRequete); // prot de la db
+                    }
+                }catch (Exception e){
+                    portsFournis.get(0).setInformation("requete invalide"); // port la db
+                }
+                this.portsFournis.get(0).setInformation(requete);
+            } else if (emetteur.getClass().equals(DataBase.class)) {
+                if (requete.equals("valide")) {
+                    // port du connection mannager
+                    this.portsFournis.get(0).setInformation(tempRequete); // port
+                }else{
+                    this.portsFournis.get(0).setInformation("Requete mal formee");
+                }
+            }
+        }
     }
 }

@@ -101,11 +101,7 @@ public class ServeurDetail extends Configuration{
         attachementMap.put(((SQL_Query)connecteurs.get(2)).getRole(2),
                 new LienAttachement(((DataBase)composants.get(2)).getRequis(0),
                         ((SQL_Query)connecteurs.get(2)).getRole(2)));
-
-
-
-
-
+        
         bindingMap.put((this).getPremierRequis(),
                 new LienBinding(((ConnectionManager)composants.get(0)).getRequis(0),
                         (this.getPremierRequis())));
@@ -132,10 +128,10 @@ public class ServeurDetail extends Configuration{
     }
 
     public void notifierBinding(Interface notifieur){
-        if (notifieur instanceof PortConfiguration) {
-            this.bindingMap.get(notifieur).TransmetterVersComposant();}
-        else
-            this.bindingMap.get(notifieur).TransmettreVerConfig();
+        if (notifieur instanceof PortConfiguration) {}
+            //this.bindingMap.get(notifieur).TransmetterVersComposant();}
+        else{}
+            //this.bindingMap.get(notifieur).TransmettreVerConfig();
     }
 
     public void Notification() {

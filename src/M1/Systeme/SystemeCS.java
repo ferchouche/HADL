@@ -4,6 +4,7 @@ package M1.Systeme;
 import M1.Client.Client;
 import M1.Connecteur.RPC;
 import M1.Interface.PortConfigurationFourni;
+import M1.Interface.PortConfigurationRequis;
 import M1.Serveur.Serveur;
 import M1.Serveur.ServeurDetail;
 import M2.Configuration.Configuration;
@@ -22,10 +23,16 @@ import java.util.Map;
  */
 public class SystemeCS extends Configuration{
     private Map<Interface, LienAttachement> attachementMap;
+    private Map<Interface, LienBinding> bindingMap;
+
     public SystemeCS() {
         super("System C/S");
+        this.portsConfigFournis.add(new PortConfigurationFourni(this, "portSystemFourni"));
+        this.portsConfigRequises.add(new PortConfigurationRequis(this, "portSystemRequis"));
+
         attachementMap = new HashMap<>();
-        composants.add(new Client(this));
+        bindingMap = new HashMap<>();
+        composants.add(new Client(this, 1967));
         composants.add(new Serveur(this));
         connecteurs.add(new RPC(this));
 
@@ -44,6 +51,15 @@ public class SystemeCS extends Configuration{
         attachementMap.put((((RPC)connecteurs.getFirst()).getRole(2)), // role fourni RPC (vers Serveur)
                 new LienAttachement(((Serveur)composants.get(1)).getPremierRequis(), // port requis client
                         ((RPC)connecteurs.getFirst()).getRole(2))); // role fourni RPC (vers Serveur)
+
+        bindingMap.put(portsConfigFournis.getFirst(),
+                new LienBinding(((Client)composants.getFirst()).getPremierFourni(),
+                portsConfigFournis.getFirst()));
+
+        bindingMap.put(((Client)composants.getFirst()).getPremierRequis(),
+                new LienBinding(((Client)composants.getFirst()).getPremierRequis(),
+                        portsConfigRequises.getFirst()));
+
     }
 
     public void notification(Interface interfaceCalling, ObjetArchitectural emetteur){
@@ -56,6 +72,10 @@ public class SystemeCS extends Configuration{
 
     public void notification(Interface interfaceCalling) {
         attachementMap.get(interfaceCalling).transmettre();
+    }
+
+    private void bind(Interface emetteur){
+        bindingMap.get(emetteur).transmettre(emetteur);
     }
 
     public void test(){

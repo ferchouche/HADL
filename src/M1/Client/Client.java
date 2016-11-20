@@ -12,18 +12,21 @@ import M2.Interface.Interface;
  */
 public class Client extends ComposantConcret {
 
+    private Integer ID;
+
     SystemeCS cs;
-    public Client(SystemeCS cs) {
+    public Client(SystemeCS cs, Integer ID) {
         super("Client");
         this.portsRequis.add(new PortComposantRequis(this, "PortClientRequis"));
         this.portsFournis.add(new PortComposantFourni(this, "PortClientFourni"));
         this.cs = cs;
+        this.ID = ID;
     }
 
     public void EnvoyerRequete() {
 
         System.out.printf("Le client envoie une requete\n");
-        (portsFournis.getFirst()).setInformation("la Requete du Client");
+        (portsFournis.getFirst()).setInformation(ID.toString() + "|GET|78");
         cs.notification(portsFournis.getFirst(), this);
         System.out.printf("\n\n\n"+this.portsFournis.getFirst().getInformation().toString()+"\n");
         System.out.printf(this.portsRequis.getFirst().getInformation().toString()+"\n");

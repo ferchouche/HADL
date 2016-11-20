@@ -6,6 +6,7 @@ import M1.Serveur.ServeurDetail;
 import M2.Composant.ComposantConcret;
 import M2.Interface.Interface;
 import M2.Interface.PortComposant;
+import M2.ObjectArchi.ObjetArchitectural;
 
 import java.time.Clock;
 
@@ -72,5 +73,24 @@ public class ConnectionManager extends ComposantConcret{
             this.portsFournis.get(0).setInformation(pc.getInformation());
 
 
+    }
+
+    public void traiter(ObjetArchitectural emetteur, String requete){
+        if(emetteur.getClass().equals(ServeurDetail.class)){
+            // port du security manager
+            this.portsFournis.get(0).setInformation(requete);
+        } else if(emetteur.getClass().equals(SecurityManager.class)){
+            if(requete.contains("|")){
+                // port de la database
+                this.portsFournis.get(0).setInformation(requete);
+            }else{
+                // port du serveur details
+                this.portsFournis.get(0).setInformation(requete);
+            }
+
+        } else if(emetteur.getClass().equals(DataBase.class)){
+            //port du serveur detail
+            this.portsFournis.get(0).setInformation(requete);
+        }
     }
 }
