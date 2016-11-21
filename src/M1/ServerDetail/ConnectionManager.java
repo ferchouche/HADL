@@ -78,11 +78,11 @@ public class ConnectionManager extends ComposantConcret{
     public void traiter(ObjetArchitectural emetteur, String requete){
         if(emetteur.getClass().equals(ServeurDetail.class)){
             // port du security manager
-            this.portsFournis.get(0).setInformation(requete);
+            this.portsFournis.get(1).setInformation(requete);
         } else if(emetteur.getClass().equals(SecurityManager.class)){
             if(requete.contains("|")){
                 // port de la database
-                this.portsFournis.get(0).setInformation(requete);
+                this.portsFournis.get(2).setInformation(requete);
             }else{
                 // port du serveur details
                 this.portsFournis.get(0).setInformation(requete);

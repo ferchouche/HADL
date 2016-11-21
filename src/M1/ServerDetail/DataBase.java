@@ -66,30 +66,30 @@ public class DataBase extends ComposantConcret{
                 if(parsed[0].equals("GET")){
                     try{
                         Integer.parseInt(parsed[1]);
-                        this.getFourni(0).setInformation("valide");
+                        this.getFourni(1).setInformation("valide");
                     } catch (Exception e){
-                        this.getFourni(0).setInformation("invalide");
+                        this.getFourni(1).setInformation("invalide");
                     }
                 }else{
-                    this.getFourni(0).setInformation("invalide");
+                    this.getFourni(1).setInformation("invalide");
                 }
             }else if(parsed.length == 3){
                 if(parsed[0].equals("SET")){
                     try{
                         Integer.parseInt(parsed[1]);
-                        this.getFourni(0).setInformation("valide");
+                        this.getFourni(1).setInformation("valide");
                     } catch (Exception e){
-                        this.getFourni(0).setInformation("invalide");
+                        this.getFourni(1).setInformation("invalide");
                     }
                 }else{
-                    this.getFourni(0).setInformation("invalide");
+                    this.getFourni(1).setInformation("invalide");
                 }
             }else{
-                this.getFourni(0).setInformation("invalide");
+                this.getFourni(1).setInformation("invalide");
             }
-        }else if(emetteur.getClass().equals(SecurityManager.class)){
+        }else if(emetteur.getClass().equals(ConnectionManager.class)){
             if (parsed.length == 2){
-                this.getFourni(0).setInformation((database.get(Integer.parseInt(parsed[1]))).toString());
+                this.getFourni(0).setInformation((database.get(Integer.parseInt(parsed[1]))).toString());//id de clé Integer.parseInt(parsed[1]
             }else {
                 database.put(Integer.parseInt(parsed[1]), parsed[2]);
                 this.getFourni(0).setInformation("Database mise a jour");

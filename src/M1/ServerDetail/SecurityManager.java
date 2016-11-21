@@ -78,12 +78,29 @@ public class SecurityManager extends ComposantConcret{
                                 requeteOnly.append("|");
                         }
                         this.tempRequete = requeteOnly.toString();
-                        portsFournis.get(0).setInformation(tempRequete); // prot de la db
+
+                        Integer permLevel = permissions.get(Integer.parseInt(parsed[0]));
+
+                        if(parsed[1].equals("GET")){
+                            if(permLevel > 0){
+                                portsFournis.get(0).setInformation(tempRequete); // prot de la db
+                            }else{
+                                this.portsFournis.get(0).setInformation("permission insuffisante");
+                            }
+
+                        }else if (parsed[1].equals("SET")){
+                            if(permLevel > 1){
+                                portsFournis.get(0).setInformation(tempRequete); // prot de la db
+                            }else{
+                                this.portsFournis.get(0).setInformation("permission insuffisante");
+                            }
+                        }else{
+                            this.portsFournis.get(0).setInformation("Requete mal formee");
+                        }
                     }
                 }catch (Exception e){
-                    portsFournis.get(0).setInformation("requete invalide"); // port la db
+                    portsFournis.get(0).setInformation("requete invalide"); //port du connection manager
                 }
-                this.portsFournis.get(0).setInformation(requete);
             } else if (emetteur.getClass().equals(DataBase.class)) {
                 if (requete.equals("valide")) {
                     // port du connection mannager
@@ -92,6 +109,8 @@ public class SecurityManager extends ComposantConcret{
                     this.portsFournis.get(0).setInformation("Requete mal formee");
                 }
             }
+        }else{
+            this.portsFournis.get(0).setInformation("Requete mal formee");
         }
     }
 }
