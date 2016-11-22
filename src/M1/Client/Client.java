@@ -8,13 +8,13 @@ import M2.Interface.Interface;
 
 
 /**
- * Created by Abdeldjallil on 23/10/2016.
+ * Classe cliente, envoie des requête vers le serveur et attend la réponse
  */
 public class Client extends ComposantConcret {
 
-    private Integer ID;
-
+    private Integer ID; //identifiant unique à chaque client, référencé chez le serveur pour les permissions
     SystemeCS cs;
+
     public Client(SystemeCS cs, Integer ID) {
         super("Client");
         this.portsRequis.add(new PortComposantRequis(this, "PortClientRequis"));
@@ -23,6 +23,11 @@ public class Client extends ComposantConcret {
         this.ID = ID;
     }
 
+    /**
+     * Test l'envoie d'une requête vers le serveur
+     * Une requête commence par l'ID du client suivis de GET ou SET, de l'ID du produit à modifier
+     * dans la base de donnée et de la potentielle nouvelle valeur de produit (le tout séparé par des "-")
+     */
     public void EnvoyerRequete() {
 
         System.out.printf("Le client envoie une requete\n");
@@ -32,15 +37,17 @@ public class Client extends ComposantConcret {
         System.out.printf(this.portsRequis.getFirst().getInformation().toString()+"\n");
     }
 
-    public void notifierSystem(Interface notifieur){
+    @Override public void notifierSystem(Interface notifieur){
         cs.notification(notifieur);
     }
 
     public PortComposantFourni getPremierFourni(){
-        return (PortComposantFourni)portsFournis.getFirst(); // without cast, function returning M2 PortComposantFourni
+        return (PortComposantFourni)portsFournis.getFirst(); // sans le cast, la classe du port fourni retourné par getFirst
+                                                             // provien du M2 et non du M1
     }
 
     public PortComposantRequis getPremierRequis(){
-        return (PortComposantRequis)portsRequis.getFirst(); // without cast, function returning M2 PortComposantRequis
+        return (PortComposantRequis)portsRequis.getFirst(); // sans le cast, la classe du port fourni retourné par getFirst
+                                                            // provien du M2 et non du M1
     }
 }

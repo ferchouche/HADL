@@ -43,7 +43,7 @@ public class Serveur extends ComposantConcret{
         return (PortComposantRequis)portsRequis.getFirst(); // without cast, function returning M2 PortComposantRequis
     }
 
-    public void notifierSystem(Interface notifieur){
+    @Override public void notifierSystem(Interface notifieur){
         if (notifieur instanceof PortComposantRequis){
             this.notificationBind(notifieur);}
         else{

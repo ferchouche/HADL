@@ -97,7 +97,7 @@ public class DataBase extends ComposantConcret{
         }
     }
 
-    public void notifierSystem(Interface notifieur){
+    @Override public void notifierSystem(Interface notifieur){
         sd.notification(notifieur, this);
     }
 

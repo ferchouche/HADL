@@ -66,8 +66,8 @@ public class SecurityManager extends ComposantConcret{
 
     public void traiter(ObjetArchitectural emetteur, String requete){
         String[] parsed = requete.split("|");
-        if (parsed.length == 3 || parsed.length == 4) {
-            if (emetteur.getClass().equals(ConnectionManager.class)) {
+        if (emetteur.getClass().equals(ConnectionManager.class)) {
+            if (parsed.length == 3 || parsed.length == 4) {
                 // port de la DataBase
                 try{
                     if(permissions.get(Integer.parseInt(parsed[0])) != null){
@@ -101,16 +101,18 @@ public class SecurityManager extends ComposantConcret{
                 }catch (Exception e){
                     portsFournis.get(0).setInformation("requete invalide"); //port du connection manager
                 }
-            } else if (emetteur.getClass().equals(DataBase.class)) {
-                if (requete.equals("valide")) {
-                    // port du connection mannager
-                    this.portsFournis.get(0).setInformation(tempRequete); // port
-                }else{
-                    this.portsFournis.get(0).setInformation("Requete mal formee");
-                }
+
+            }else{
+                this.portsFournis.get(0).setInformation("Requete mal formee");
             }
-        }else{
-            this.portsFournis.get(0).setInformation("Requete mal formee");
+        } else if (emetteur.getClass().equals(DataBase.class)) {
+            if (requete.equals("valide")) {
+                // port du connection mannager
+                this.portsFournis.get(0).setInformation(tempRequete); // port
+            }else{
+                this.portsFournis.get(0).setInformation("Requete mal formee");
+            }
         }
+
     }
 }

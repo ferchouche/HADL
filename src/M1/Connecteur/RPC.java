@@ -1,19 +1,16 @@
 package M1.Connecteur;
 
-import M1.Interface.PortComposantFourni;
-import M1.Interface.PortComposantRequis;
+
 import M1.Interface.RoleFourni;
 import M1.Interface.RoleRequis;
 import M1.Systeme.SystemeCS;
 import M2.Connecteur.ConnecteurConcret;
 import M2.Connecteur.Glue;
 import M2.Interface.Interface;
-import M2.Interface.Role;
-import M2.ObjectArchi.ObjetArchitectural;
 
 
 /**
- * Created by Abdeldjallil on 23/10/2016.
+ * Connecteur entre le client et le serveur(composant)
  */
 public class RPC extends ConnecteurConcret {
 
@@ -26,19 +23,27 @@ public class RPC extends ConnecteurConcret {
         this.cs = cs;
 
 
+        /**
+         * glue serveur vers client
+         */
         glues.add(new Glue("versCalledClient", this){
-            @Override public void coller(){
+            @Override public void coller(){ // on implémente la fonction coller à l'instanciation
+                                            // pour ne pas créer une classe juste pour ça.
+
+                // !! ICI la variable "roles" référence la liste de la glue et non du RPC !!
                 roles.get(1).setInformation(roles.getFirst().getInformation());
-                ((RPC)connecteurConcret).notifierSystem(roles.get(1));// c'est 1 et non pas 0
+                ((RPC)connecteurConcret).notifierSystem(roles.get(1));
 
             }
         });
 
+        // on donne à la glue les roles reliés aux connecteur (ici role requis et roles fourni vers client)
         glues.getFirst().ajouterRole(roles.getFirst());
         glues.getFirst().ajouterRole(roles.get(1));
-        //je pense qu'on doit instancier objet glue puis ajouter les roles pour appeler la méthode coller
 
-
+        /**
+         * glue client vers serveur
+         */
         glues.add(new Glue("versCalledServeur", this){
             @Override public void coller(){
                 roles.get(1).setInformation(roles.getFirst().getInformation());
@@ -46,6 +51,7 @@ public class RPC extends ConnecteurConcret {
 
             }
         });
+        // role requis et role fourni vers serveur
         glues.get(1).ajouterRole(roles.getFirst());
         glues.get(1).ajouterRole(roles.get(2));
     }
