@@ -32,7 +32,7 @@ public class SystemeCS extends Configuration{
 
         attachementMap = new HashMap<>();
         bindingMap = new HashMap<>();
-        composants.add(new Client(this, 1967));
+        composants.add(new Client(this, 3987));
         composants.add(new Serveur(this));
         connecteurs.add(new RPC(this));
 
@@ -63,10 +63,6 @@ public class SystemeCS extends Configuration{
     }
 
     public void notification(Interface interfaceCalling, ObjetArchitectural emetteur){
-        /*if (emetteur instanceof Client)
-            System.out.printf("La configue appelle le lien d'attachement entre le client et le  RPC \n");
-        else
-            System.out.printf("La configue appelle le lien d'attachement entre le serveur et le RPC \n");*/
         attachementMap.get(interfaceCalling).transmettre(emetteur);
     }
 

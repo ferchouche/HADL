@@ -12,7 +12,7 @@ public class PortConfigurationFourni extends M2.Interface.PortConfigurationFourn
     }
 
     @Override
-    public void setInformation(Object information) {
+    public void setInformation(String information) {
         this.information = information.toString();
         if (parent instanceof ServeurDetail) {
             System.out.printf("Le message est sur le port "+ this.getName() + "  du serveur Detail\n");

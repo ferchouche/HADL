@@ -15,8 +15,8 @@ public class PortComposantFourni extends M2.Interface.PortComposantFourni{
     public PortComposantFourni(ObjetArchitectural parent, String name){
         super(parent,name);
     }
-    @Override public void setInformation(Object information){
-        this.information = information.toString();//j'ai ajouté cette instruction
+    @Override public void setInformation(String information){
+        this.information = information;//j'ai ajouté cette instruction
 
         if (this.parent instanceof Client) {
             System.out.printf("Le message est sur le port " + this.getName() + " du Client\n");

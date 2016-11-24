@@ -7,7 +7,7 @@ import M2.ObjectArchi.ObjetArchitectural;
  */
 public abstract class Interface {
     public ObjetArchitectural parent;
-    protected Object information;
+    protected String information;
     protected String name;
 
     public Interface(ObjetArchitectural objetArchi, String name){
@@ -15,11 +15,11 @@ public abstract class Interface {
         this.name = name;
     }
 
-    public Object getInformation() {
+    public String getInformation() {
         return information;
     }
 
-    public void setInformation(Object information) {
+    public void setInformation(String information) {
         this.information = information;
     }
 

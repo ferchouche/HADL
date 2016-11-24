@@ -35,7 +35,7 @@ public class DataBase extends ComposantConcret{
     private void initDB() {
         database.put(303, "pomme");
         database.put(504, "poire");
-        database.put(34, "bannane");
+        database.put(78, "bannane");
     }
 
     public PortComposantFourni getFourni(int i) {
@@ -47,21 +47,10 @@ public class DataBase extends ComposantConcret{
         return (PortComposantRequis)portsRequis.get(i); // without cast, function returning M2 PortComposantRequis
     }
 
-    public void copierMessageEntrePort(PortComposant pc) {
-        /*
-        avant on doit faire test si utilisateur  n'a pa le droit c pa la peine d'acceder à la bdd
-        sinon on accede a la bdd pour verifier par exemple si tous lé champs de la rqt existe
-         */
-        if (pc.getName() == "check_query_Requis")
-            this.portsFournis.get(1).setInformation(pc.getInformation());
-        else //query_D_Requis
-            this.portsFournis.get(0).setInformation("Voici la reponse du database");
-    }
-
     //TODO corriger les ports en fonction de l'emetteur
-    public void traiter(ObjetArchitectural emetteur, String requete){
-        String[] parsed = requete.split("|");
-        if (emetteur.getClass().equals(SecurityManager.class)){
+    public void traiter(PortComposant pc, String requete){
+        String[] parsed = requete.split("\\|");
+        if (pc.getName() == "check_query_Requis"){
             if (parsed.length == 2){
                 if(parsed[0].equals("GET")){
                     try{
@@ -87,7 +76,7 @@ public class DataBase extends ComposantConcret{
             }else{
                 this.getFourni(1).setInformation("invalide");
             }
-        }else if(emetteur.getClass().equals(ConnectionManager.class)){
+        }else {
             if (parsed.length == 2){
                 this.getFourni(0).setInformation((database.get(Integer.parseInt(parsed[1]))).toString());//id de clé Integer.parseInt(parsed[1]
             }else {

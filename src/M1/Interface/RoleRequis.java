@@ -17,7 +17,7 @@ public class RoleRequis extends M2.Interface.Role{
         super(parent, name);
     }
 
-    @Override public void setInformation(ObjetArchitectural emetteur, Object information) {
+    @Override public void setInformation(ObjetArchitectural emetteur, String information) {
         this.information = information;
         if (this.parent instanceof RPC) {
             if (emetteur.getClass().getName().equals("M1.Client.Client")) { // Si le client est emetteur

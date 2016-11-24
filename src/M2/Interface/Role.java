@@ -13,7 +13,7 @@ public class Role extends Interface {
         super(objetArchi, name);
     }
 
-    public void setInformation(ObjetArchitectural emetteur, Object information){}
+    public void setInformation(ObjetArchitectural emetteur, String information){}
 
 
 }

@@ -14,8 +14,9 @@ public class Principale {
     public static void main(String[] args) {
         SystemeCS monS = new SystemeCS();
         monS.test();
-        /*ServeurDetail sd = new ServeurDetail(null);
-        sd.testerrrr();*/
-    }
 
+        /*String requete = "789|GET|78";
+        String[] parsed = requete.split("\\|");
+        System.out.printf(parsed.length+"");*/
+    }
 }

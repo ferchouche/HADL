@@ -16,9 +16,8 @@ public class PortComposantRequis extends M2.Interface.PortComposantRequis{
         super(parent,name);
     }
 
-    @Override public void setInformation(Object information){
-        this.information = information.toString();//j'ai ajouté cette instruction
-        //System.out.println("Le message est arrivé sur le port requis du : " + parent.getClass().getName());
+    @Override public void setInformation(String information){
+        this.information = information;
         if (this.parent instanceof Serveur) {
             System.out.printf("Le message est sur le port  "+ this.getName() + "  du serveur\n");
             ((Serveur)parent).notifierSystem(this);
@@ -26,7 +25,7 @@ public class PortComposantRequis extends M2.Interface.PortComposantRequis{
         else
             if (this.parent instanceof ConnectionManager){
                 System.out.printf("Le message est sur le port  "+ this.getName() + "  du Connection manager\n");
-                ((ConnectionManager)parent).copierMessageEntrePort(this);
+                ((ConnectionManager)parent).traiter(this, information);
         }
         else
                 if (this.parent instanceof Client) {
@@ -35,12 +34,12 @@ public class PortComposantRequis extends M2.Interface.PortComposantRequis{
             else
                 if (this.parent instanceof SecurityManager) {
                     System.out.printf("Le message est sur le port  "+ this.getName() + " du SecurityManager\n");
-                    ((SecurityManager)parent).copierMessageEntrePort(this);
+                    ((SecurityManager)parent).traiter(this, information);
                 }
                 else
                 if (this.parent instanceof DataBase) {
                     System.out.printf("Le message est sur le port  "+ this.getName() + " du DataBase\n");
-                    ((DataBase)parent).copierMessageEntrePort(this);
+                    ((DataBase)parent).traiter(this, information);
         }
     }
 }

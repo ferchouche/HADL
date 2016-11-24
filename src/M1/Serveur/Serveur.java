@@ -51,10 +51,11 @@ public class Serveur extends ComposantConcret{
         }
     }
     public void notificationBind(Interface interfaceCalling) {
-        if (interfaceCalling instanceof PortConfiguration){}
-            //bindingMap.get(interfaceCalling).TransmetterVersComposant();
-        else{}
-            //bindingMap.get(interfaceCalling).TransmettreVerConfig();
+
+        if (interfaceCalling instanceof PortConfiguration)
+            bindingMap.get(interfaceCalling).TransmetterVersComposant();
+        else
+            bindingMap.get(interfaceCalling).TransmettreVerConfig();
     }
 
 }

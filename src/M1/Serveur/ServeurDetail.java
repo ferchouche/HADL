@@ -128,10 +128,10 @@ public class ServeurDetail extends Configuration{
     }
 
     public void notifierBinding(Interface notifieur){
-        if (notifieur instanceof PortConfiguration) {}
-            //this.bindingMap.get(notifieur).TransmetterVersComposant();}
-        else{}
-            //this.bindingMap.get(notifieur).TransmettreVerConfig();
+        if (notifieur instanceof PortConfiguration)
+            this.bindingMap.get(notifieur).TransmetterVersComposant();
+        else
+            this.bindingMap.get(notifieur).TransmettreVerConfig();
     }
 
     public void Notification() {

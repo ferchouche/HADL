@@ -13,7 +13,7 @@ import java.util.HashMap;
 /**
  * Created by Abdeldjallil on 11/11/2016.
  */
-public class SecurityManager extends ComposantConcret{
+public class SecurityManager extends ComposantConcret {
 
     ServeurDetail sd;
     HashMap<Integer, Integer> permissions;
@@ -43,20 +43,8 @@ public class SecurityManager extends ComposantConcret{
         return (PortComposantFourni)portsFournis.get(i); // without cast, function returning M2 PortComposantFourni
     }
 
-
     public PortComposantRequis getRequis(int i){
         return (PortComposantRequis)portsRequis.get(i); // without cast, function returning M2 PortComposantRequis
-    }
-
-    public void copierMessageEntrePort(PortComposant pc) {
-        /*
-        avant on doit faire test si utilisateur  n'a pa le droit c pa la peine d'acceder à la bdd
-        sinon on accede a la bdd pour verifier par exemple si tous lé champs de la rqt existe
-         */
-        if (pc.getName() == "security_auth_Requis")
-            this.portsFournis.get(1).setInformation(pc.getInformation());
-        else //check_query_Requis
-            this.portsFournis.get(0).setInformation(pc.getInformation());
     }
 
     public void notifierSystem(Interface notifieur){
@@ -64,53 +52,56 @@ public class SecurityManager extends ComposantConcret{
        // System.out.printf(notifieur.getName().toString());
     }
 
-    public void traiter(ObjetArchitectural emetteur, String requete){
-        String[] parsed = requete.split("|");
+    public void traiter(PortComposant pc, String requete){
+
+        String[] parsed = requete.split("\\|");
+
+        if (pc.getName() == "security_auth_Requis") {
         if (parsed.length == 3 || parsed.length == 4) {
-            if (emetteur.getClass().equals(ConnectionManager.class)) {
-                // port de la DataBase
-                try{
-                    if(permissions.get(Integer.parseInt(parsed[0])) != null){
-                        StringBuilder requeteOnly = new StringBuilder();
-                        for (Integer i = 1; i < parsed.length; i++){
-                            requeteOnly.append(parsed[i]);
-                            if (i < parsed.length + 1)
-                                requeteOnly.append("|");
-                        }
-                        this.tempRequete = requeteOnly.toString();
-
-                        Integer permLevel = permissions.get(Integer.parseInt(parsed[0]));
-
-                        if(parsed[1].equals("GET")){
-                            if(permLevel > 0){
-                                portsFournis.get(0).setInformation(tempRequete); // prot de la db
-                            }else{
-                                this.portsFournis.get(0).setInformation("permission insuffisante");
+                    // port de la DataBase
+                    try {
+                        if (permissions.get(Integer.parseInt(parsed[0])) != null) {
+                            StringBuilder requeteOnly = new StringBuilder();
+                            for (Integer i = 1; i < parsed.length; i++) {
+                                requeteOnly.append(parsed[i]);
+                                if (i < parsed.length + 1)
+                                    requeteOnly.append("|");
                             }
+                            this.tempRequete = requeteOnly.toString();
+                            Integer permLevel = permissions.get(Integer.parseInt(parsed[0]));
+                            if (parsed[1].equals("GET")) {
+                                if (permLevel > 0) {
+                                    portsFournis.get(1).setInformation(tempRequete); // prot de la db
+                                } else {
+                                    this.portsFournis.get(0).setInformation("permission insuffisante");
+                                }
 
-                        }else if (parsed[1].equals("SET")){
-                            if(permLevel > 1){
-                                portsFournis.get(0).setInformation(tempRequete); // prot de la db
-                            }else{
-                                this.portsFournis.get(0).setInformation("permission insuffisante");
+                            } else if (parsed[1].equals("SET")) {
+                                if (permLevel > 1) {
+                                    portsFournis.get(1).setInformation(tempRequete); // prot de la db
+                                } else {
+                                    this.portsFournis.get(0).setInformation("permission insuffisante");
+                                }
+                            } else {
+                                this.portsFournis.get(0).setInformation("Requete mal formee");
                             }
-                        }else{
-                            this.portsFournis.get(0).setInformation("Requete mal formee");
                         }
+                        else
+                            portsFournis.get(0).setInformation("Client n'existe pas dans la bdd"); //port du connection manager
+                    } catch (Exception e) {
+                        portsFournis.get(0).setInformation("requete invalide"); //port du connection manager
                     }
-                }catch (Exception e){
-                    portsFournis.get(0).setInformation("requete invalide"); //port du connection manager
-                }
-            } else if (emetteur.getClass().equals(DataBase.class)) {
-                if (requete.equals("valide")) {
-                    // port du connection mannager
-                    this.portsFournis.get(0).setInformation(tempRequete); // port
                 }else{
-                    this.portsFournis.get(0).setInformation("Requete mal formee");
-                }
-            }
-        }else{
-            this.portsFournis.get(0).setInformation("Requete mal formee");
+            this.portsFournis.get(0).setInformation(parsed.length + "  Error");
         }
-    }
+            }
+        else {
+            if (requete.equals("valide")) {
+                // port du connection mannager
+                this.portsFournis.get(0).setInformation(tempRequete);
+            } else {
+                this.portsFournis.get(0).setInformation("Requete mal formee");
+            }
+        }
+        }
 }
