@@ -26,7 +26,7 @@ public class Client extends ComposantConcret {
     public void EnvoyerRequete() {
 
         System.out.printf("Le client envoie une requete\n");
-        (portsFournis.getFirst()).setInformation(ID.toString() + "|GET|78");
+        (portsFournis.getFirst()).setInformation(ID.toString() + "|SET|3|toto");
         /*String[] parsed = (portsFournis.getFirst()).getInformation().split("\\|");
         System.out.printf(parsed.length+"");*/
         cs.notification(portsFournis.getFirst(), this);

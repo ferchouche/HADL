@@ -76,7 +76,7 @@ public class DataBase extends ComposantConcret{
             }else{
                 this.getFourni(1).setInformation("invalide");
             }
-        }else {
+        }else {//on doit verfifier si le produit existe
             if (parsed.length == 2){
                 this.getFourni(0).setInformation((database.get(Integer.parseInt(parsed[1]))).toString());//id de clé Integer.parseInt(parsed[1]
             }else {
