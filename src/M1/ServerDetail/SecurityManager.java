@@ -6,7 +6,6 @@ import M1.Serveur.ServeurDetail;
 import M2.Composant.ComposantConcret;
 import M2.Interface.Interface;
 import M2.Interface.PortComposant;
-import M2.ObjectArchi.ObjetArchitectural;
 
 import java.util.HashMap;
 
@@ -53,6 +52,7 @@ public class SecurityManager extends ComposantConcret {
     }
 
     public void traiter(PortComposant pc, String requete){
+
 
         String[] parsed = requete.split("\\|");
 
@@ -104,4 +104,5 @@ public class SecurityManager extends ComposantConcret {
             }
         }
         }
+
 }

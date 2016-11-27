@@ -9,7 +9,4 @@ public class RoleFourni extends M2.Interface.Role {
     public RoleFourni(ObjetArchitectural parent, String name){
         super(parent, name);
     }
-
-
-
 }

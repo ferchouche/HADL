@@ -7,5 +7,4 @@ import M2.ObjectArchi.ObjetArchitectural;
  */
 public interface  ComposantAbstrait extends ObjetArchitectural {
 
-
 }

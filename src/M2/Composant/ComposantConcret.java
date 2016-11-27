@@ -1,5 +1,6 @@
 package M2.Composant;
 
+import M2.Interface.Interface;
 import M2.Interface.PortComposantFourni;
 import M2.Interface.PortComposantRequis;
 
@@ -31,4 +32,6 @@ public abstract class ComposantConcret implements ComposantAbstrait {
     public void setName(String name) {
         this.name = name;
     }
+
+    public void notifierSystem(Interface portComposant){}
 }

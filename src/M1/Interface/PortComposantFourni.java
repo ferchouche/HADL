@@ -5,6 +5,7 @@ import M1.ServerDetail.ConnectionManager;
 import M1.ServerDetail.DataBase;
 import M1.ServerDetail.SecurityManager;
 import M1.Serveur.Serveur;
+import M2.Composant.ComposantConcret;
 import M2.ObjectArchi.ObjetArchitectural;
 
 /**
@@ -18,6 +19,10 @@ public class PortComposantFourni extends M2.Interface.PortComposantFourni{
     @Override public void setInformation(String information){
         this.information = information;//j'ai ajouté cette instruction
 
+        System.out.println("Le message est sur le port : " + this.getName() + " du " + parent.getClass().getName());
+        ((ComposantConcret)parent).notifierSystem(this); // à tester !
+
+        /*
         if (this.parent instanceof Client) {
             System.out.printf("Le message est sur le port " + this.getName() + " du Client\n");
         }
@@ -40,7 +45,7 @@ public class PortComposantFourni extends M2.Interface.PortComposantFourni{
         if (this.parent instanceof DataBase) {
             System.out.printf("Le message est sur le port " + this.getName() + " du DataBase\n");
             ((DataBase)parent).notifierSystem(this);
-        }
+        }*/
 
     }
 }

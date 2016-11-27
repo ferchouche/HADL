@@ -18,8 +18,8 @@ public class PortComposantRequis extends M2.Interface.PortComposantRequis{
 
     @Override public void setInformation(String information){
         this.information = information;
+
         if (this.parent instanceof Serveur) {
-            System.out.printf("Le message est sur le port  "+ this.getName() + "  du serveur\n");
             ((Serveur)parent).notifierSystem(this);
         }
         else
