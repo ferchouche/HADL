@@ -92,7 +92,7 @@ public class SecurityManager extends ComposantConcret {
                         portsFournis.get(0).setInformation("requete invalide"); //port du connection manager
                     }
                 }else{
-            this.portsFournis.get(0).setInformation(parsed.length + "  Error");
+            this.portsFournis.get(0).setInformation("Error");
         }
             }
         else {

@@ -76,12 +76,17 @@ public class DataBase extends ComposantConcret{
             }else{
                 this.getFourni(1).setInformation("invalide");
             }
-        }else {//on doit verfifier si le produit existe
-            if (parsed.length == 2){
-                this.getFourni(0).setInformation((database.get(Integer.parseInt(parsed[1]))).toString());//id de clé Integer.parseInt(parsed[1]
-            }else {
-                database.put(Integer.parseInt(parsed[1]), parsed[2]);
-                this.getFourni(0).setInformation("Database mise a jour");
+        }else {
+            if (database.get(Integer.parseInt(parsed[1])) == null) {
+                this.getFourni(0).setInformation("Le code du produit que vous cherchez n'existe pas");
+            }
+            else {
+                if (parsed.length == 2) {
+                    this.getFourni(0).setInformation((database.get(Integer.parseInt(parsed[1]))).toString());//id de clé Integer.parseInt(parsed[1]
+                } else {
+                    database.put(Integer.parseInt(parsed[1]), parsed[2]);
+                    this.getFourni(0).setInformation("Database mise a jour");
+                }
             }
         }
     }
